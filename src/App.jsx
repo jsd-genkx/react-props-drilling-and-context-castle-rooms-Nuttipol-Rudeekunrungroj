@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TaskForm from './component/TaskForm';
 import './App.css';
+import TaskList from './component/TaskList';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -9,15 +10,15 @@ function App() {
     setTasks([...tasks, task]);
   }
 
+  function deleteTask(taskId) { 
+    setTasks(tasks.filter(task => task.id !== taskId));
+  }
+
   return (
     <>
       <h1>Task Tracker</h1>
       <TaskForm onAddTask={addTask} />
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>{task.text}</li>
-        ))}
-      </ul>
+      <TaskList tasks={tasks} deleteTask={deleteTask} />
     </>
   );
 }
