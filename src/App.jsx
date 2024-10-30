@@ -14,11 +14,14 @@ function App() {
     setTasks(tasks.filter(task => task.id !== taskId));
   }
 
+  function editTask(taskId, updatedText) { 
+    setTasks(tasks.map(task => task.id === taskId ? { ...task, text: updatedText } : task ));
+  }
   return (
     <>
       <h1>Task Tracker</h1>
       <TaskForm onAddTask={addTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} onEdit={editTask} />
     </>
   );
 }
